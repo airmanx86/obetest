@@ -1,10 +1,11 @@
 import { DocumentClient } from './dynamodb';
 import { GetCommand, PutCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { Payment } from './types';
 
 export const getPayment = async (paymentId: string): Promise<Payment | null> => {
     const result = await DocumentClient.send(
         new GetCommand({
-            TableName: 'Payments',
+            TableName: 'PaymentsTable',
             Key: { paymentId },
         })
     );
@@ -15,7 +16,7 @@ export const getPayment = async (paymentId: string): Promise<Payment | null> => 
 export const listPayments = async (): Promise<Payment[]> => {
     const result = await DocumentClient.send(
         new ScanCommand({
-            TableName: 'Payments',
+            TableName: 'PaymentsTable',
         })
     );
 
@@ -25,14 +26,8 @@ export const listPayments = async (): Promise<Payment[]> => {
 export const createPayment = async (payment: Payment) => {
     await DocumentClient.send(
         new PutCommand({
-            TableName: 'Payments',
+            TableName: 'PaymentsTable',
             Item: payment,
         })
     );
-};
-
-export type Payment = {
-    id: string;
-    amount: number;
-    currency: string;
 };
