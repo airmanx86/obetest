@@ -1,5 +1,6 @@
 import { DocumentClient } from './dynamodb';
 import { GetCommand, PutCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { Payment } from './types';
 
 export const getPayment = async (paymentId: string): Promise<Payment | null> => {
     const result = await DocumentClient.send(
@@ -29,10 +30,4 @@ export const createPayment = async (payment: Payment) => {
             Item: payment,
         })
     );
-};
-
-export type Payment = {
-    id: string;
-    amount: number;
-    currency: string;
 };

@@ -7,6 +7,10 @@ The code is a reflection of our real stack, using API Gateway, AWS Lambda and Dy
   
 If you want to deploy this code to your own AWS account to test it, you can run `npm run deploy` from the root directory. 
 
+## Assumptions
+
+1. Payment ID is a UUID
+
 ## Question 1
 The API handler for `getPayment` simply goes to the database to retrieve a payment with the matching payment ID. The handler is currently unimplemented (`src/getPayment.ts`), simply throwing an error, however the test for the handler is fully completed (`test/getPayment.test.ts`).
   
