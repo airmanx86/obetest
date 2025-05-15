@@ -42,7 +42,7 @@ export class BeTestStack extends cdk.Stack {
     createLambda = (name: string, path: string) => {
         return new NodejsFunction(this, name, {
             functionName: name,
-            runtime: Runtime.NODEJS_16_X,
+            runtime: Runtime.NODEJS_22_X,
             entry: path,
         });
     };
