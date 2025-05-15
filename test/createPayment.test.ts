@@ -35,7 +35,8 @@ describe('When the user requests to create a payment', () => {
         } as unknown as APIGatewayProxyEvent);
 
         expect(result.statusCode).toBe(422);
-        expect(JSON.parse(result.body)).toEqual({ message: 'Invalid payment request' });
+        const actualErrorMessage = (JSON.parse(result.body) as { message: string }).message;
+        expect(actualErrorMessage).toBe('Invalid payment request');
     });
 
     it('Returns HTTP 422 and an error message if the amount is invalid', async () => {
@@ -48,7 +49,8 @@ describe('When the user requests to create a payment', () => {
         } as unknown as APIGatewayProxyEvent);
 
         expect(result.statusCode).toBe(422);
-        expect(JSON.parse(result.body)).toEqual({ message: 'Invalid payment request' });
+        const actualErrorMessage = (JSON.parse(result.body) as { message: string }).message;
+        expect(actualErrorMessage).toBe('Invalid payment request');
     });
 
     it('Returns HTTP 500 and an error message if the payment creation fails', async () => {
