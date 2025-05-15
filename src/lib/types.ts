@@ -183,3 +183,19 @@ export type Payment = {
     amount: number;
     currency: IsoCurrencyCode;
 };
+
+export type PagingInfo = {
+    pageSize: number;
+    startingToken?: string;
+};
+
+export type PageMetadata = {
+    pageSize: number;
+    lastToken?: string;
+    completed: boolean;
+}
+
+export type PageResult<T> = {
+    items: T[];
+    metadata: PageMetadata;
+}

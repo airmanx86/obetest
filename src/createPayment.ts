@@ -14,7 +14,12 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     const body = createPaymentRequestSchema.safeParse(parseInput(event.body || '{}'));
 
     if (!body.success) {
-        return buildResponse(422, { message: 'Invalid payment request' }, { 'content-type': 'application/json' });
+        const unprocessableContentPayload = {
+            message: 'Invalid payment request',
+            errors: body.error.format(),
+        };
+
+        return buildResponse(422, unprocessableContentPayload, { 'content-type': 'application/json' });
     }
 
     const newPaymentId = randomUUID();
