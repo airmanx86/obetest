@@ -10,6 +10,10 @@ If you want to deploy this code to your own AWS account to test it, you can run 
 ## Assumptions
 
 1. Payment ID is a UUID
+2. For question 2, we no longer need to take user provided ID
+3. Path for `createPayment` and `listPayments` is `/payments`
+4. Path for `getPayment` is `/payments/{id}`
+5. Currency query for `listPayments` is `currency` and currency is in ISO format
 
 ## Question 1
 The API handler for `getPayment` simply goes to the database to retrieve a payment with the matching payment ID. The handler is currently unimplemented (`src/getPayment.ts`), simply throwing an error, however the test for the handler is fully completed (`test/getPayment.test.ts`).
